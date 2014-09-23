@@ -12,7 +12,6 @@
 @implementation PHAsset (SaveToAlbum)
 
 -(PHAssetCollection*)albumWithTitle:(NSString*)title{
-    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"localizedTitle = %@", title];
     PHFetchOptions *options = [[PHFetchOptions alloc]init];
     options.predicate = predicate;
@@ -21,7 +20,6 @@
         return result[0];
     }
     return nil;
-    
 }
 
 -(void)saveToAlbum:(NSString*)title completionBlock:(PHAssetBoolBlock)completionBlock{
@@ -40,7 +38,6 @@
     
     // Check if album exists. If not, create it.
     PHAssetCollection *assetCollection = [self albumWithTitle:title];
-    
     if(assetCollection){
         // Album exists
         saveAssetCollection(assetCollection);
@@ -57,8 +54,6 @@
                 PHAssetCollection *assetCollection = [self albumWithTitle:title];
                 saveAssetCollection(assetCollection);
             }
-            
-            
         }];
     }
 }
