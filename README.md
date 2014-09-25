@@ -1,8 +1,6 @@
 A category to quickly/easily save a PHAsset to an Album. 
 
-Sample usage:
-
-
+Sample usage for saving an asset to an album (will create):
 
 ```
 PHAsset *asset = // however you are getting your PHAsset
@@ -14,3 +12,13 @@ PHAsset *asset = // however you are getting your PHAsset
     }
 }];
 ```
+
+Sample usage for getting metadata from an asset
+
+```
+PHAsset *asset = // however you are getting your PHAsset
+[asset requestMetadataWithCompletionBlock:^(NSDictionary *metadata) {
+    NSLog(@"Metadata: %@", metadata);
+}];
+```
+
