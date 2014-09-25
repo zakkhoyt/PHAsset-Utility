@@ -5,11 +5,11 @@
 //  Copyright (c) 2014 Zakk Hoyt. All rights reserved.
 //
 
+#ifdef __IPHONE_8_0
+
 #import <Foundation/Foundation.h>
 
-#ifdef __IPHONE_8_0
 @import Photos;
-#endif
 
 typedef void (^PHAssetBoolBlock)(BOOL success);
 typedef void (^PHAssetMetadataBlock)(NSDictionary *metadata);
@@ -18,3 +18,5 @@ typedef void (^PHAssetMetadataBlock)(NSDictionary *metadata);
 -(void)saveToAlbum:(NSString*)album completionBlock:(PHAssetBoolBlock)completionBlock;
 -(void)requestMetadataWithCompletionBlock:(PHAssetMetadataBlock)completionBlock;
 @end
+
+#endif
