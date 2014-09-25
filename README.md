@@ -1,4 +1,4 @@
-A category to quickly/easily save a PHAsset to an Album. 
+A category to simplify a few tasks for the PHAsset class. 
 
 Sample usage for saving an asset to an album (will create):
 
