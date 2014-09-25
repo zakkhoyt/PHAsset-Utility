@@ -5,6 +5,8 @@
 //  Copyright (c) 2014 Zakk Hoyt. All rights reserved.
 //
 
+#ifdef __IPHONE_8_0
+
 #import "PHAsset+Utilities.h"
 @import Photos;
 
@@ -81,3 +83,5 @@
     
 }
 @end
+
+#endif //__IPHONE_8_0
