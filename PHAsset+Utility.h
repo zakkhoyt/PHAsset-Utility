@@ -24,6 +24,10 @@ typedef void (^PHAssetAssetBoolBlock)(PHAsset *asset, BOOL success);
 // Get metadata dictionary of an asset (the kind with {Exif}, {GPS}, etc...
 -(void)requestMetadataWithCompletionBlock:(PHAssetMetadataBlock)completionBlock;
 
+// Update the location and date of an existing asset
+-(void)updateLocation:(CLLocation*)location creationDate:(NSDate*)creationDate completionBlock:(PHAssetBoolBlock)completionBlock;
+
+
 //    // Save an image to camera roll (returns PHAsset in completion block)
 //    UIImage *image = [UIImage imageNamed:@"terribleImage"];
 //    [PHAsset saveImageToApplicationAlbum:image location:nil completionBlock:^(PHAsset *asset, BOOL success) {

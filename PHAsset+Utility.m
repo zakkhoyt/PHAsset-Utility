@@ -69,6 +69,20 @@
 }
 
 
+-(void)updateLocation:(CLLocation*)location creationDate:(NSDate*)creationDate completionBlock:(PHAssetBoolBlock)completionBlock{
+    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+        PHAssetChangeRequest *assetRequest = [PHAssetChangeRequest changeRequestForAsset:self];
+        if(location) assetRequest.location = location;
+        if(creationDate) assetRequest.creationDate = creationDate;
+    } completionHandler:^(BOOL success, NSError *error) {
+        if(success){
+            completionBlock(YES);
+        } else {
+            completionBlock(NO);
+        }
+    }];
+}
+
 
 +(void)saveImageToApplicationAlbum:(UIImage*)image location:(CLLocation*)location completionBlock:(PHAssetAssetBoolBlock)completionBlock{
     __block PHObjectPlaceholder *placeholderAsset = nil;
