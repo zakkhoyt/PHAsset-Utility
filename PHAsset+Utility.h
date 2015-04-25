@@ -26,14 +26,14 @@ typedef void (^PHAssetAssetBoolBlock)(PHAsset *asset, BOOL success);
 
 //    // Save an image to camera roll (returns PHAsset in completion block)
 //    UIImage *image = [UIImage imageNamed:@"terribleImage"];
-//    [[PKAssetManager sharedInstance] saveImageToApplicationAlbum:image location:nil completionBlock:^(PHAsset *asset, BOOL success) {
+//    [PHAsset saveImageToApplicationAlbum:image location:nil completionBlock:^(PHAsset *asset, BOOL success) {
 //        NSLog(@"asset saved to camera roll");
 //    }];
 +(void)saveImageToApplicationAlbum:(UIImage*)image location:(CLLocation*)location completionBlock:(PHAssetAssetBoolBlock)completionBlock;
 
 //    // Save video to camera roll (returns PHAsset in completion block)
 //    NSURL *url = [NSURL urlWithString:@"terribleURL"];
-//    [[PKAssetManager sharedInstance] saveVideoAtURL:videoFileURL location:nil completionBlock:^(PHAsset *asset, BOOL success) {
+//    [PHAsset saveVideoAtURL:videoFileURL location:nil completionBlock:^(PHAsset *asset, BOOL success) {
 //        NSLog(@"asset saved to camera roll");
 //    }];
 +(void)saveVideoAtURL:(NSURL*)url location:(CLLocation*)location completionBlock:(PHAssetAssetBoolBlock)completionBlock;
