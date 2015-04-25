@@ -5,31 +5,20 @@
 //  Copyright (c) 2014 Zakk Hoyt. All rights reserved.
 //
 
-#ifdef __IPHONE_8_0
 
-#import "PHAsset+Utilities.h"
+
+#import "PHAsset+Utility.h"
 @import Photos;
 
 @implementation PHAsset (Utilities)
 
 #pragma mark Public methods
 
--(void)requestMetadataWithCompletionBlock:(PHAssetMetadataBlock)completionBlock{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        PHContentEditingInputRequestOptions *editOptions = [[PHContentEditingInputRequestOptions alloc]init];
-        editOptions.networkAccessAllowed = YES;
-        [self requestContentEditingInputWithOptions:editOptions completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
-            CIImage *image = [CIImage imageWithContentsOfURL:contentEditingInput.fullSizeImageURL];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completionBlock(image.properties);
-            });
-        }];
-    });
-}
+
+
 
 
 -(void)saveToAlbum:(NSString*)title completionBlock:(PHAssetBoolBlock)completionBlock{
-    
     void (^saveAssetCollection)(PHAssetCollection *assetCollection) = ^(PHAssetCollection *assetCollection){
         [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
             PHAssetCollectionChangeRequest *changeRequest = [PHAssetCollectionChangeRequest changeRequestForAssetCollection:assetCollection];
@@ -66,6 +55,54 @@
     }
 }
 
+-(void)requestMetadataWithCompletionBlock:(PHAssetMetadataBlock)completionBlock{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        PHContentEditingInputRequestOptions *editOptions = [[PHContentEditingInputRequestOptions alloc]init];
+        editOptions.networkAccessAllowed = YES;
+        [self requestContentEditingInputWithOptions:editOptions completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
+            CIImage *image = [CIImage imageWithContentsOfURL:contentEditingInput.fullSizeImageURL];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionBlock(image.properties);
+            });
+        }];
+    });
+}
+
+
+
++(void)saveImageToApplicationAlbum:(UIImage*)image location:(CLLocation*)location completionBlock:(PHAssetAssetBoolBlock)completionBlock{
+    __block PHObjectPlaceholder *placeholderAsset = nil;
+    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+        PHAssetChangeRequest *newAssetRequest = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
+        newAssetRequest.location = location;
+        newAssetRequest.creationDate = [NSDate date];
+        placeholderAsset = newAssetRequest.placeholderForCreatedAsset;
+    } completionHandler:^(BOOL success, NSError *error) {
+        if(success){
+            PHAsset *asset = [self getAssetFromlocalIdentifier:placeholderAsset.localIdentifier];
+            completionBlock(asset, YES);
+        } else {
+            completionBlock(nil, NO);
+        }
+    }];
+}
+
++(void)saveVideoAtURL:(NSURL*)url location:(CLLocation*)location completionBlock:(PHAssetAssetBoolBlock)completionBlock{
+    __block PHObjectPlaceholder *placeholderAsset = nil;
+    [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+        PHAssetChangeRequest *newAssetRequest = [PHAssetChangeRequest creationRequestForAssetFromVideoAtFileURL:url];
+        newAssetRequest.location = location;
+        newAssetRequest.creationDate = [NSDate date];
+        placeholderAsset = newAssetRequest.placeholderForCreatedAsset;
+    } completionHandler:^(BOOL success, NSError *error) {
+        if(success){
+            PHAsset *asset = [self getAssetFromlocalIdentifier:placeholderAsset.localIdentifier];
+            completionBlock(asset, YES);
+        } else {
+            completionBlock(nil, NO);
+        }
+    }];
+}
 
 
 #pragma mark Private helpers
@@ -82,6 +119,18 @@
     return nil;
     
 }
+
++(PHAsset*)getAssetFromlocalIdentifier:(NSString*)localIdentifier{
+    if(localIdentifier == nil){
+        NSLog(@"Cannot get asset from localID because it is nil");
+        return nil;
+    }
+    PHFetchResult *result = [PHAsset fetchAssetsWithLocalIdentifiers:@[localIdentifier] options:nil];
+    if(result.count){
+        return result[0];
+    }
+    return nil;
+}
+
 @end
 
-#endif //__IPHONE_8_0
