@@ -22,3 +22,23 @@ PHAsset *asset = // however you are getting your PHAsset
 }];
 ```
 
+Sample: Save an image to camera roll (returns PHAsset in completion block)
+
+```
+UIImage *image = [UIImage imageNamed:@"terribleImage"];
+[PHAsset saveImageToApplicationAlbum:image location:nil completionBlock:^(PHAsset *asset, BOOL success) {
+    NSLog(@"asset saved to camera roll");
+}];
+```
+
+Save video to camera roll (returns PHAsset in completion block)
+
+```
+NSURL *url = [NSURL urlWithString:@"terribleURL"];
+[PHAsset saveVideoAtURL:videoFileURL location:nil completionBlock:^(PHAsset *asset, BOOL success) {
+    NSLog(@"asset saved to camera roll");
+}];
+```
+
+
+
