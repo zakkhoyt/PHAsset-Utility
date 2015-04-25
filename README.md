@@ -1,6 +1,6 @@
 A category to simplify a few tasks for the PHAsset class. 
 
-Sample usage for saving an asset to an album (will create):
+Sample usage for saving an PHAsset to an album (will create the album if it doesn't exist):
 
 ```
 PHAsset *asset = // however you are getting your PHAsset
@@ -13,7 +13,7 @@ PHAsset *asset = // however you are getting your PHAsset
 }];
 ```
 
-Sample usage for getting metadata from an asset
+Sample usage for getting metadata from a PHAsset
 
 ```
 PHAsset *asset = // however you are getting your PHAsset
@@ -22,7 +22,7 @@ PHAsset *asset = // however you are getting your PHAsset
 }];
 ```
 
-Sample: Save an image to camera roll (returns PHAsset in completion block)
+Sample: Save a UIImage to camera roll (returns PHAsset in completion block)
 
 ```
 UIImage *image = [UIImage imageNamed:@"terribleImage"];
@@ -33,7 +33,7 @@ UIImage *image = [UIImage imageNamed:@"terribleImage"];
                      }];
 ```
 
-Save video to camera roll (returns PHAsset in completion block)
+Save video (from NSURL) to camera roll (returns PHAsset in completion block)
 
 ```
 NSURL *url = [NSURL urlWithString:@"terribleURL"];
