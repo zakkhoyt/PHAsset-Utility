@@ -1,5 +1,14 @@
 A category to simplify a few tasks for the PHAsset class. 
 
+This class assumes that you've already prompted for permissions like so:
+
+```
+[PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+    // This has happened
+}];
+```
+
+
 Sample usage for saving an PHAsset to an album (will create the album if it doesn't exist):
 
 ```
