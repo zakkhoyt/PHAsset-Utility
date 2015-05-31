@@ -1,15 +1,6 @@
-A category to simplify a few tasks for the PHAsset class. 
+A category to simplify common PHAsset functions (Saving to camera roll, updating location, retreiving metatdata)
 
-This class assumes that you've already prompted for permissions like so:
-
-```
-[PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
-    // This has happened
-}];
-```
-
-Sample: Save a UIImage to camera roll (returns PHAsset in completion block)
-
+Sample: Save UIImage to camera roll with optional location (return PHAsset in completion block)
 ```
 UIImage *image = [UIImage imageNamed:@"terribleImage"];
 [PHAsset saveImageToCameraRoll:image 
@@ -19,8 +10,7 @@ UIImage *image = [UIImage imageNamed:@"terribleImage"];
                }];
 ```
 
-Save video (from NSURL) to camera roll (returns PHAsset in completion block)
-
+Sample: Save video (from NSURL) to camera roll (returns PHAsset in completion block)
 ```
 NSURL *url = [NSURL urlWithString:@"terribleURL"];
 [PHAsset saveVideoAtURL:videoFileURL 
@@ -31,8 +21,7 @@ NSURL *url = [NSURL urlWithString:@"terribleURL"];
 ```
 
 
-Sample usage for saving an PHAsset to an album (will create the album if it doesn't exist):
-
+Sample: Assign a PHAsset to an Album (will create the album if it doesn't exist):
 ```
 PHAsset *asset = // however you are getting your PHAsset
 [asset saveToAlbum:@"My App Album" completionBlock:^(BOOL success) {
@@ -44,8 +33,7 @@ PHAsset *asset = // however you are getting your PHAsset
 }];
 ```
 
-Sample usage for getting metadata from a PHAsset
-
+Sample: Retrieve the REAL metadata for a PHAsset (Exif, GPS, PNG, Maker, etc...)
 ```
 PHAsset *asset = // however you are getting your PHAsset
 [asset requestMetadataWithCompletionBlock:^(NSDictionary *metadata) {
@@ -53,7 +41,7 @@ PHAsset *asset = // however you are getting your PHAsset
 }];
 ```
 
-Sample use for updating or assigning a location to an asset
+Sample: Alter the location and creation date of a PHAsset
 
 ```
 CLLocation *location = [[CLLocation alloc]initWithLatitude:37.5 longitude:-122];
@@ -67,4 +55,9 @@ NSDate *date = [NSDate date];
 }];
 ```
 
-
+Note: This class assumes that you've already prompted for permissions like so:
+```
+[PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+    // This has happened
+}];
+```
