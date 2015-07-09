@@ -65,7 +65,7 @@ PHAsset *asset = // however you are getting your PHAsset
 ```
 
 A sample metatdata dictionary looks like this:
-
+```
 //    {
 //        ColorModel = RGB;
 //        DPIHeight = 72;
@@ -138,3 +138,4 @@ A sample metatdata dictionary looks like this:
 //            YResolution = 72;
 //        };
 //    }
+```
