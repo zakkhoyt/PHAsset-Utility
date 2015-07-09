@@ -1,13 +1,16 @@
-A category to simplify common PHAsset functions (Saving to camera roll, updating location, retreiving metatdata)
+## PHAsset+Utility
+#### A category to simplify common PHAsset functions (Saving to camera roll, updating location, retreiving metatdata)
 
-Note: This class assumes that you've already prompted for permissions like so:
+### Note: This class assumes that you've already prompted for permissions like so:
 ```
 [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
     // This has happened
 }];
 ```
+Looking for a solution for permission prompting? Check out  [VWWPermissionKit](https://github.com/zakkhoyt/VWWPermissionKit)
 
-Looking for an easy way to get users to allow permissions? Check out [VWWPermissionKit](https://github.com/zakkhoyt/VWWPermissionKit)
+### Example usage
+
 
 
 Sample: Save UIImage to camera roll with optional location (return PHAsset in completion block)
