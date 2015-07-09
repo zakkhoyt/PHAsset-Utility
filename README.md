@@ -2,7 +2,7 @@ A category to simplify common PHAsset functions (Saving to camera roll, updating
 
 Sample: Save UIImage to camera roll with optional location (return PHAsset in completion block)
 ```
-UIImage *image = [UIImage imageNamed:@"terribleImage"];
+UIImage *image = [UIImage imageNamed:@"bestImageEver"];
 [PHAsset saveImageToCameraRoll:image 
                       location:nil 
                completionBlock:^(PHAsset *asset, BOOL success) {
@@ -12,7 +12,7 @@ UIImage *image = [UIImage imageNamed:@"terribleImage"];
 
 Sample: Save video (from NSURL) to camera roll (returns PHAsset in completion block)
 ```
-NSURL *url = [NSURL urlWithString:@"terribleURL"];
+NSURL *url = [NSURL urlWithString:@"bestURLEver"];
 [PHAsset saveVideoAtURL:videoFileURL 
                location:nil 
         completionBlock:^(PHAsset *asset, BOOL success) {
