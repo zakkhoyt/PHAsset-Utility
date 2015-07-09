@@ -5,18 +5,12 @@
 //  Copyright (c) 2014 Zakk Hoyt. All rights reserved.
 //
 
-
-
 #import "PHAsset+Utility.h"
 @import Photos;
 
 @implementation PHAsset (Utilities)
 
 #pragma mark Public methods
-
-
-
-
 
 -(void)saveToAlbum:(NSString*)title completionBlock:(PHAssetBoolBlock)completionBlock{
     void (^saveAssetCollection)(PHAssetCollection *assetCollection) = ^(PHAssetCollection *assetCollection){
@@ -31,9 +25,7 @@
         }];
     };
     
-    
     PHAssetCollection *assetCollection = [self albumWithTitle:title];
-    
     if(assetCollection){
         // Album exists
         saveAssetCollection(assetCollection);
@@ -49,8 +41,6 @@
                 PHAssetCollection *assetCollection = [self albumWithTitle:title];
                 saveAssetCollection(assetCollection);
             }
-            
-            
         }];
     }
 }
@@ -67,7 +57,6 @@
         }];
     });
 }
-
 
 -(void)updateLocation:(CLLocation*)location creationDate:(NSDate*)creationDate completionBlock:(PHAssetBoolBlock)completionBlock{
     [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
@@ -117,7 +106,6 @@
         }
     }];
 }
-
 
 #pragma mark Private helpers
 
