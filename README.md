@@ -61,3 +61,5 @@ Note: This class assumes that you've already prompted for permissions like so:
     // This has happened
 }];
 ```
+
+Looking for an easy way to get users to allow permissions? Check out [VWWPermissionKit](https://github.com/zakkhoyt/VWWPermissionKit)
