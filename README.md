@@ -1,5 +1,5 @@
 ### PHAsset+Utility
-A category to simplify common PHAsset functions (Saving to camera roll, updating location, retreiving metatdata)
+A category to simplify common PHAsset functions.
 
 ##### Note: This class assumes that you've already prompted for permissions like so:
 ```
@@ -10,8 +10,6 @@ A category to simplify common PHAsset functions (Saving to camera roll, updating
 Looking for a solution for permission prompting? Check out  [VWWPermissionKit](https://github.com/zakkhoyt/VWWPermissionKit)
 
 ##### Example usage
-
-
 
 ###### Sample: Save UIImage to camera roll with optional location (return PHAsset in completion block)
 ```
