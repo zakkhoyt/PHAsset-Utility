@@ -55,6 +55,7 @@ Looking for a solution for user permission prompting? Check out this framework:
  */
 -(void)requestMetadataWithCompletionBlock:(PHAssetMetadataBlock)completionBlock;
 ```
+### Metadata
 
 The metatdata dictionary returned from requestMetadataWithCompletionBlock will have subdictionaries broken into logical categories. Use Apple's ImageIO framework for parsing.
 
