@@ -9,60 +9,49 @@ A category to simplify common PHAsset functions.
 ```
 Looking for a solution for permission prompting? Check out  [VWWPermissionKit](https://github.com/zakkhoyt/VWWPermissionKit)
 
-##### Example usage
-
-###### Sample: Save UIImage to camera roll with optional location (return PHAsset in completion block)
-```
-UIImage *image = [UIImage imageNamed:@"bestImageEver"];
-[PHAsset saveImageToCameraRoll:image 
-                      location:nil 
-               completionBlock:^(PHAsset *asset, BOOL success) {
-                   NSLog(@"asset saved to camera roll");
-               }];
-```
-
-###### Sample: Save video (from NSURL) to camera roll (returns PHAsset in completion block)
-```
-NSURL *url = [NSURL urlWithString:@"bestURLEver"];
-[PHAsset saveVideoAtURL:videoFileURL 
-               location:nil 
-        completionBlock:^(PHAsset *asset, BOOL success) {
-            NSLog(@"asset saved to camera roll");
-        }];
-```
-
-
-###### Sample: Assign a PHAsset to an Album (will create the album if it doesn't exist):
-```
-PHAsset *asset = // however you are getting your PHAsset
-[asset saveToAlbum:@"My App Album" completionBlock:^(BOOL success) {
-    if(success){
-        // Your asset now resides in My App Album
-    } else {
-        // Something bad happened. Handle it here.
-    }
-}];
-```
-###### Sample: Alter the location and creation date of a PHAsset
 
 ```
-CLLocation *location = [[CLLocation alloc]initWithLatitude:37.5 longitude:-122];
-NSDate *date = [NSDate date];
-[asset updateLocation:location creationDate:date completionBlock:^(BOOL success) {
-    if(success){
-        // Asset has new location and date
-    } else {
-        // Something bad happened. Handle it here.
-    }
-}];
-```
+/*!
+ @method        saveToAlbum:completionBlock
+ @description   Save a copy of a PHAsset to a photo album. Will create the album if it doesn't exist.
+ @param         title                  The title of the album.
+ @param         completionBlock        This block is passed a BOOL for success.  This parameter may be nil.
+ */
+-(void)saveToAlbum:(NSString*)title completionBlock:(PHAssetBoolBlock)completionBlock;
 
-###### Sample: Retrieve the REAL metadata for a PHAsset (Exif, GPS, PNG, Maker, etc...)
-```
-PHAsset *asset = // however you are getting your PHAsset
-[asset requestMetadataWithCompletionBlock:^(NSDictionary *metadata) {
-    NSLog(@"Metadata: %@", metadata);
-}];
+/*!
+ @method        requestMetadataWithCompletionBlock
+ @description   Get metadata dictionary of an asset (the kind with {Exif}, {GPS}, etc...
+ @param         completionBlock        This block is passed a dictionary of metadata properties. See ImageIO framework for parsing/reading these. This parameter may be nil.
+ */
+-(void)requestMetadataWithCompletionBlock:(PHAssetMetadataBlock)completionBlock;
+
+/*!
+ @method        updateLocation:creationDate:completionBlock
+ @description   Update the location and date of an existing asset
+ @param         location               A CLLocation object to be written to the PHAsset. See CoreLocation framework for obtaining locations.
+ @param         creationDate           An NSDate to be written to the PHAsset.
+ @param         completionBlock        This block is passed the PHAsset updated with location/date (if applied) and BOOL for success. This parameter may be nil.
+ */
+-(void)updateLocation:(CLLocation*)location creationDate:(NSDate*)creationDate completionBlock:(PHAssetBoolBlock)completionBlock;
+
+/*!
+ @method        saveImageToCameraRoll:location:completionBlock
+ @description   Save an image to camera roll with optional completion (returns PHAsset in completion block)
+ @param         location               A CLLocation object to be written to the PHAsset. See CoreLocation framework for obtaining locations. This parameter may be nil.
+ @param         creationDate           An NSDate to be written to the PHAsset.
+ @param         completionBlock        Returns the PHAsset which was written and BOOL for success. This parameter may be nil.
+ */
++(void)saveImageToCameraRoll:(UIImage*)image location:(CLLocation*)location completionBlock:(PHAssetAssetBoolBlock)completionBlock;
+
+/*!
+ @method        saveVideoAtURL:location:completionBlock
+ @description   Save a video to camera roll with optional completion (returns PHAsset in completion block)
+ @param         location               A CLLocation object to be written to the PHAsset. See CoreLocation framework for obtaining locations. This parameter may be nil.
+ @param         creationDate           An NSDate to be written to the PHAsset.
+ @param         completionBlock        Returns the PHAsset which was written and BOOL for success. This parameter may be nil.
+ */
++(void)saveVideoAtURL:(NSURL*)url location:(CLLocation*)location completionBlock:(PHAssetAssetBoolBlock)completionBlock;
 ```
 
 A metatdata dictionary can have subdictionaries broken into logical sections. See ImageIO framework for constant strings. 
@@ -140,3 +129,4 @@ A metatdata dictionary can have subdictionaries broken into logical sections. Se
 //        };
 //    }
 ```
+
