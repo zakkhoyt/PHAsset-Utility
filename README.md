@@ -1,6 +1,9 @@
 ### PHAsset+Utility
 A category to simplify common PHAsset functions.
 
+---
+
+### Photos Permission
 ##### Note: This class assumes that you've already obtained permission from the user like so:
 ```
 [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
@@ -9,7 +12,9 @@ A category to simplify common PHAsset functions.
 ```
 Looking for a solution for user permission prompting? Check out this framework: 
 
-####[VWWPermissionKit](https://github.com/zakkhoyt/VWWPermissionKit)
+#####[VWWPermissionKit](https://github.com/zakkhoyt/VWWPermissionKit)
+
+---
 
 ### About this category
 ```
@@ -55,6 +60,9 @@ Looking for a solution for user permission prompting? Check out this framework:
  */
 -(void)requestMetadataWithCompletionBlock:(PHAssetMetadataBlock)completionBlock;
 ```
+
+---
+
 ### Metadata
 
 The metatdata dictionary returned from requestMetadataWithCompletionBlock will have subdictionaries broken into logical categories. Use Apple's ImageIO framework for parsing.
