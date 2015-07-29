@@ -1,13 +1,13 @@
 ### PHAsset+Utility
 A category to simplify common PHAsset functions.
 
-##### Note: This class assumes that you've already prompted for permissions like so:
+##### Note: This class assumes that you've already obtained permission from the user like so:
 ```
 [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
-    // This has happened
+    // copacetic...
 }];
 ```
-Looking for a solution for permission prompting? Check out  [VWWPermissionKit](https://github.com/zakkhoyt/VWWPermissionKit)
+Looking for a solution for user permission prompting? Check out this framework: [VWWPermissionKit](https://github.com/zakkhoyt/VWWPermissionKit)
 
 
 ```
